@@ -1,10 +1,11 @@
-import { StatusBar } from 'expo-status-bar'
-import { useState } from 'react'
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
+import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, Button, TextInput,} from 'react-native'
+interface Props {}
 
-export default function App() {
-  const [name, setName] = useState('Jordan')
-  const [gameChosen, setGameChosen] = useState('Mario')
+const App: React.FC<Props> = ()=>{
+  const [name, setName] = useState<String>('Jordan')
+  const [gameChosen, setGameChosen] = useState<String>('Mario')
 
   return (
     <View style={styles.container}>
@@ -32,6 +33,8 @@ export default function App() {
     </View>
   )
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -66,3 +69,5 @@ const styles = StyleSheet.create({
     paddingRight: 25,
   },
 })
+
+export default App
