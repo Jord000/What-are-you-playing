@@ -18,9 +18,7 @@ const App: React.FC<Props> = ()=>{
         <Text>You would like to play - {gameChosen}</Text>
         <Text></Text>
       </View>
-      <View style={styles.buttonContainer}>
-        <Button title="submit" />
-      </View>
+
       <Text>Change name:</Text>
       <TextInput
         style={styles.input}
@@ -29,6 +27,18 @@ const App: React.FC<Props> = ()=>{
           setName(val)
         }}
       />
+      <Text>I'd like to play:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Super Mario"
+        onChangeText={(val) => {
+          setGameChosen(val)
+        }}
+        multiline
+      />
+      <View style={styles.buttonContainer}>
+        <Button title="submit" />
+      </View>
       <StatusBar style="auto" />
     </View>
   )
