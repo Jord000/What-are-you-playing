@@ -34,12 +34,14 @@ const App: React.FC<Props> = () => {
   const pressGame: Function = (item: Game) => {
     setGameChosen(item.name)
   }
-  const textInputRef = useRef<HTMLInputElement>()
+  const textInputRef = useRef<TextInput>(null)
 
   const pressSubmit: Function = () => {
     setDisplayName(name)
     setName('')
-    textInputRef.current.clear()
+    if (textInputRef.current) {
+      textInputRef.current.clear()
+    }
   }
 
   return (
