@@ -1,6 +1,6 @@
 {
   "expo": {
-    "entryPoint": "./build/App.js",
+    "entryPoint": "./src/App.tsx",
     "name": "games-app",
     "slug": "games-app",
     "version": "1.0.0",

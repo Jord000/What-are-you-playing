@@ -1,14 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import { registerRootComponent } from 'expo';
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Button, TextInput,} from 'react-native'
+import { StyleSheet, Text, View, Button, TextInput, ScrollView,} from 'react-native'
 interface Props {}
-type Player = {id: number, name: string}
+type Game = {id: number, name: string}
 
 const App: React.FC<Props> = ()=>{
   const [name, setName] = useState<String>('Jordan')
   const [gameChosen, setGameChosen] = useState<String>('Mario')
-  const [players, setPlayers] = useState<Array<Player>>([{id: 1, name: 'Jordan'}, {id:2,name:'Jess'}])
+  const [games, setGames] = useState<Array<Game>>(
+    [{ id: 1, name: 'Super Mario Bros.' },
+    { id: 2, name: 'The Legend of Zelda: Breath of the Wild' },
+    { id: 3, name: 'Mario Kart 8 Deluxe' },
+    { id: 4, name: 'Super Smash Bros. Ultimate' },
+    { id: 5, name: 'Animal Crossing: New Horizons' },
+    { id: 6, name: 'Splatoon 2' },
+    { id: 7, name: 'Pokémon Sword and Shield' },
+    { id: 8, name: 'Metroid Dread' },
+    { id: 9, name: 'Fire Emblem: Three Houses' },
+    { id: 10, name: `Luigi's Mansion 3` }])
 
   return (
     <View style={styles.container}>
@@ -42,6 +52,13 @@ const App: React.FC<Props> = ()=>{
       <View style={styles.buttonContainer}>
         <Button title="submit" />
       </View>
+      <ScrollView>
+        <View ><Text style={styles.games}>Games available:</Text></View>
+    {games.map((game)=>{
+      return <View key={game.id}><Text style={styles.games}>{game.name}</Text></View>
+    })}
+      </ScrollView>
+
       <StatusBar style="auto" />
     </View>
   )
@@ -55,6 +72,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop:50,
+    marginBottom: 20,
   },
   header: {
     backgroundColor: '#f5d57f',
@@ -81,6 +100,12 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     paddingRight: 25,
   },
+  games: {
+    fontWeight: '500',
+    padding: 20,
+    backgroundColor: '#faebc8',
+    marginBottom: 20,
+  }
 })
 
 registerRootComponent(App)
