@@ -10,7 +10,10 @@ interface Props {
 
 const GamesList: React.FC<Props> = ({ gameChosen, setGameChosen }) => {
   const removeListItem: Function = (item: String) => {
-    setGameChosen(gameChosen.splice((gameChosen.indexOf(item), 1)))
+    const indexOfItem: number = gameChosen.indexOf(item)
+    const gamesArrray: Array<String> =[...gameChosen]
+    gamesArrray.splice(indexOfItem, 1)
+    setGameChosen(gamesArrray)
   }
 
   return (
