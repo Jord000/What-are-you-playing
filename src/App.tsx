@@ -1,25 +1,24 @@
 import { StatusBar } from 'expo-status-bar'
 import { registerRootComponent } from 'expo'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import {
-  StyleSheet,
   Text,
   View,
-  Button,
-  TextInput,
   FlatList,
-  ScrollView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native'
 import styles from './Styles'
 import ChangeName from './ChangeName'
+import GamesList from './GamesList'
 
 interface Props {}
 type Game = { id: number; name: string }
 
 const App: React.FC<Props> = () => {
-  const [displayName, setDisplayName] = useState<String>('????')
-  const [gameChosen, setGameChosen] = useState<String>('Mario')
+  const [displayName, setDisplayName] = useState<String>('')
+  const [gameChosen, setGameChosen] = useState<Array<String>>([])
   const [games, setGames] = useState<Array<Game>>([
     { id: 1, name: 'Super Mario Bros.' },
     { id: 2, name: 'The Legend of Zelda: Breath of the Wild' },
@@ -34,45 +33,43 @@ const App: React.FC<Props> = () => {
   ])
 
   const pressGame: Function = (item: Game) => {
-    setGameChosen(item.name)
+    setGameChosen([...gameChosen, item.name])
   }
 
-
-
-
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.boldTitle}>GAMES</Text>
-      </View>
-      <View style={styles.body}>
-        <Text>Hello {displayName}</Text>
-        <Text>What would you like to play today?</Text>
-        <Text>You would like to play - {gameChosen}</Text>
-        <Text></Text>
-      </View>
-    <ChangeName setDisplayName={setDisplayName}/>
-      <View>
-        <Text style={styles.games}>Games available:</Text>
-      </View>
-      <FlatList
-        numColumns={1}
-        data={games}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => {
-              pressGame(item)
-            }}
-          >
-            <Text style={styles.games}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
-      />
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss()
+      }}
+    >
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.boldTitle}>GAMES TO PLAY</Text>
+        </View>
+        <Text>{displayName}</Text>
+        <GamesList gameChosen={gameChosen} setGameChosen={setGameChosen} />
+        <ChangeName setDisplayName={setDisplayName} />
+        <View>
+          <Text style={styles.games}>Example Games:</Text>
+        </View>
+        <FlatList
+          numColumns={1}
+          data={games}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => {
+                pressGame(item)
+              }}
+            >
+              <Text style={styles.games}>{item.name}</Text>
+            </TouchableOpacity>
+          )}
+        />
 
-      <StatusBar style="auto" />
-    </View>
+        <StatusBar style="auto" />
+      </View>
+    </TouchableWithoutFeedback>
   )
 }
-
 
 registerRootComponent(App)

@@ -14,16 +14,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 30,
     marginBottom: 5,
-    borderRadius:3,
-
+    borderRadius: 3,
   },
   boldTitle: {
-    fontWeight: '400',
-  },
-  body: {
-    backgroundColor: '#faebc8',
-    padding: 20,
-    alignItems: 'center',
+    fontWeight: '600',
   },
   buttonContainer: {
     marginTop: 20,
@@ -33,17 +27,52 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 2,
     borderColor: 'grey',
-    minWidth: 100,
+    minWidth: 200,
     padding: 5,
     paddingLeft: 25,
     paddingRight: 25,
+    height: '75%',
+    marginRight: 20,
   },
   games: {
     fontWeight: '500',
-    padding: 20,
+    padding: 15,
     backgroundColor: '#faebc8',
     marginBottom: 20,
     marginHorizontal: 5,
+  },
+  gamesList: {
+    flex: 1,
+    minHeight: 100,
+    padding: 10,
+    paddingBottom: 20,
+    backgroundColor: '#faebc8',
+    alignItems: 'center',
+  },
+  list: {
+    flex: 1,
+  },
+  listItem: {
+    backgroundColor: '#ffc654',
+    padding:3,
+    paddingHorizontal:10,
+    margin:3,
+    borderRadius:3,
+    flexDirection:'row'
+  },
+  minusIcon:{
+    marginLeft:'auto'
+  },
+  listText:{
+    paddingRight:5,
+  },
+  changeName: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  changeNameTitle: {
+    fontWeight: '500',
+    textAlign: 'center',
   },
 })
 
