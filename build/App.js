@@ -24,11 +24,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const expo_status_bar_1 = require("expo-status-bar");
+const expo_1 = require("expo");
 const react_1 = __importStar(require("react"));
 const react_native_1 = require("react-native");
 const App = () => {
     const [name, setName] = (0, react_1.useState)('Jordan');
     const [gameChosen, setGameChosen] = (0, react_1.useState)('Mario');
+    const [players, setPlayers] = (0, react_1.useState)([{ id: 1, name: 'Jordan' }, { id: 2, name: 'Jess' }]);
     return (react_1.default.createElement(react_native_1.View, { style: styles.container },
         react_1.default.createElement(react_native_1.View, { style: styles.header },
             react_1.default.createElement(react_native_1.Text, { style: styles.boldTitle }, "GAMES")),
@@ -41,12 +43,16 @@ const App = () => {
                 "You would like to play - ",
                 gameChosen),
             react_1.default.createElement(react_native_1.Text, null)),
-        react_1.default.createElement(react_native_1.View, { style: styles.buttonContainer },
-            react_1.default.createElement(react_native_1.Button, { title: "submit" })),
         react_1.default.createElement(react_native_1.Text, null, "Change name:"),
         react_1.default.createElement(react_native_1.TextInput, { style: styles.input, placeholder: "My name is", onChangeText: (val) => {
                 setName(val);
             } }),
+        react_1.default.createElement(react_native_1.Text, null, "I'd like to play:"),
+        react_1.default.createElement(react_native_1.TextInput, { style: styles.input, placeholder: "Super Mario", onChangeText: (val) => {
+                setGameChosen(val);
+            }, multiline: true }),
+        react_1.default.createElement(react_native_1.View, { style: styles.buttonContainer },
+            react_1.default.createElement(react_native_1.Button, { title: "submit" })),
         react_1.default.createElement(expo_status_bar_1.StatusBar, { style: "auto" })));
 };
 const styles = react_native_1.StyleSheet.create({
@@ -82,5 +88,4 @@ const styles = react_native_1.StyleSheet.create({
         paddingRight: 25,
     },
 });
-exports.default = App;
-//# sourceMappingURL=App.js.map
+(0, expo_1.registerRootComponent)(App);

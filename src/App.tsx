@@ -1,11 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
+import { registerRootComponent } from 'expo';
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, Button, TextInput,} from 'react-native'
 interface Props {}
+type Player = {id: number, name: string}
 
 const App: React.FC<Props> = ()=>{
   const [name, setName] = useState<String>('Jordan')
   const [gameChosen, setGameChosen] = useState<String>('Mario')
+  const [players, setPlayers] = useState<Array<Player>>([{id: 1, name: 'Jordan'}, {id:2,name:'Jess'}])
 
   return (
     <View style={styles.container}>
@@ -80,4 +83,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default App
+registerRootComponent(App)
