@@ -11,12 +11,14 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native'
+import styles from './Styles'
+import ChangeName from './ChangeName'
+
 interface Props {}
 type Game = { id: number; name: string }
 
 const App: React.FC<Props> = () => {
-  const [name, setName] = useState<String>('___')
-  const [displayName, setDisplayName] = useState<String>(name)
+  const [displayName, setDisplayName] = useState<String>('????')
   const [gameChosen, setGameChosen] = useState<String>('Mario')
   const [games, setGames] = useState<Array<Game>>([
     { id: 1, name: 'Super Mario Bros.' },
@@ -34,15 +36,9 @@ const App: React.FC<Props> = () => {
   const pressGame: Function = (item: Game) => {
     setGameChosen(item.name)
   }
-  const textInputRef = useRef<TextInput>(null)
 
-  const pressSubmit: Function = () => {
-    setDisplayName(name)
-    setName('')
-    if (textInputRef.current) {
-      textInputRef.current.clear()
-    }
-  }
+
+
 
   return (
     <View style={styles.container}>
@@ -55,24 +51,7 @@ const App: React.FC<Props> = () => {
         <Text>You would like to play - {gameChosen}</Text>
         <Text></Text>
       </View>
-
-      <Text>Change name:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="My name is"
-        onChangeText={(val) => {
-          setName(val)
-        }}
-        ref={textInputRef}
-      />
-      <View style={styles.buttonContainer}>
-        <Button
-          onPress={() => {
-            pressSubmit()
-          }}
-          title="submit"
-        />
-      </View>
+    <ChangeName setDisplayName={setDisplayName}/>
       <View>
         <Text style={styles.games}>Games available:</Text>
       </View>
@@ -95,47 +74,5 @@ const App: React.FC<Props> = () => {
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50,
-    marginBottom: 20,
-  },
-  header: {
-    backgroundColor: '#f5d57f',
-    padding: 50,
-  },
-  boldTitle: {
-    fontWeight: '400',
-  },
-  body: {
-    backgroundColor: '#faebc8',
-    padding: 20,
-    alignItems: 'center',
-  },
-  buttonContainer: {
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: 'grey',
-    minWidth: 100,
-    padding: 5,
-    paddingLeft: 25,
-    paddingRight: 25,
-  },
-  games: {
-    fontWeight: '500',
-    padding: 20,
-    backgroundColor: '#faebc8',
-    marginBottom: 20,
-    marginHorizontal: 5,
-  },
-})
 
 registerRootComponent(App)
