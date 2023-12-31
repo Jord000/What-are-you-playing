@@ -9,9 +9,9 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native'
-import styles from './Styles'
 import ChangeName from './ChangeName'
 import GamesList from './GamesList'
+
 
 interface Props {}
 type Game = { id: number; name: string }
@@ -33,8 +33,11 @@ const App: React.FC<Props> = () => {
   ])
 
   const pressGame: Function = (item: Game) => {
+  
     setGameChosen([...gameChosen, item.name])
   }
+
+
 
   return (
     <TouchableWithoutFeedback
@@ -42,17 +45,18 @@ const App: React.FC<Props> = () => {
         Keyboard.dismiss()
       }}
     >
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.boldTitle}>GAMES TO PLAY</Text>
+      <View className=" bg-amber-50 items-center justify-center flex-1">
+        <View className="bg-orange-300 px-16 mb-5 rounded py-4 mt-12">
+          <Text className="font-bold">GAMES TO PLAY</Text>
         </View>
         <Text>{displayName}</Text>
         <GamesList gameChosen={gameChosen} setGameChosen={setGameChosen} />
         <ChangeName setDisplayName={setDisplayName} />
         <View>
-          <Text style={styles.games}>Example Games:</Text>
+          <Text className="font-semibold p-4 mb-2">Example Games:</Text>
         </View>
         <FlatList
+        className='mb-8'
           numColumns={1}
           data={games}
           renderItem={({ item }) => (
@@ -61,7 +65,9 @@ const App: React.FC<Props> = () => {
                 pressGame(item)
               }}
             >
-              <Text style={styles.games}>{item.name}</Text>
+              <Text className="font-semibold p-4 mb-3 bg-red-100">
+                {item.name}
+              </Text>
             </TouchableOpacity>
           )}
         />
