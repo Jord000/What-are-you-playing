@@ -22,15 +22,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const expo_status_bar_1 = require("expo-status-bar");
 const expo_1 = require("expo");
 const react_1 = __importStar(require("react"));
 const react_native_1 = require("react-native");
+const ChangeName_1 = __importDefault(require("./ChangeName"));
+const GamesList_1 = __importDefault(require("./GamesList"));
 const App = () => {
-    const [name, setName] = (0, react_1.useState)('Jordan');
-    const [gameChosen, setGameChosen] = (0, react_1.useState)('Mario');
-    const [games, setGames] = (0, react_1.useState)([{ id: 1, name: 'Super Mario Bros.' },
+    const [displayName, setDisplayName] = (0, react_1.useState)('');
+    const [gameChosen, setGameChosen] = (0, react_1.useState)([]);
+    const [games, setGames] = (0, react_1.useState)([
+        { id: 1, name: 'Super Mario Bros.' },
         { id: 2, name: 'The Legend of Zelda: Breath of the Wild' },
         { id: 3, name: 'Mario Kart 8 Deluxe' },
         { id: 4, name: 'Super Smash Bros. Ultimate' },
@@ -39,69 +45,26 @@ const App = () => {
         { id: 7, name: 'Pokémon Sword and Shield' },
         { id: 8, name: 'Metroid Dread' },
         { id: 9, name: 'Fire Emblem: Three Houses' },
-        { id: 10, name: `Luigi's Mansion 3` }]);
-    return (react_1.default.createElement(react_native_1.View, { style: styles.container },
-        react_1.default.createElement(react_native_1.View, { style: styles.header },
-            react_1.default.createElement(react_native_1.Text, { style: styles.boldTitle }, "GAMES")),
-        react_1.default.createElement(react_native_1.View, { style: styles.body },
-            react_1.default.createElement(react_native_1.Text, null,
-                "Hello ",
-                name),
-            react_1.default.createElement(react_native_1.Text, null, "What would you like to play today?"),
-            react_1.default.createElement(react_native_1.Text, null,
-                "You would like to play - ",
-                gameChosen),
-            react_1.default.createElement(react_native_1.Text, null)),
-        react_1.default.createElement(react_native_1.Text, null, "Change name:"),
-        react_1.default.createElement(react_native_1.TextInput, { style: styles.input, placeholder: "My name is", onChangeText: (val) => {
-                setName(val);
-            } }),
-        react_1.default.createElement(react_native_1.Text, null, "I'd like to play:"),
-        react_1.default.createElement(react_native_1.TextInput, { style: styles.input, placeholder: "Super Mario", onChangeText: (val) => {
-                setGameChosen(val);
-            }, multiline: true }),
-        react_1.default.createElement(react_native_1.View, { style: styles.buttonContainer },
-            react_1.default.createElement(react_native_1.Button, { title: "submit" })),
-        react_1.default.createElement(react_native_1.View, null, games.map((game) => {
-            return react_1.default.createElement(react_native_1.View, { key: game.id },
-                react_1.default.createElement(react_native_1.Text, { style: styles.games }, game.name));
-        })),
-        react_1.default.createElement(expo_status_bar_1.StatusBar, { style: "auto" })));
+        { id: 10, name: `Luigi's Mansion 3` },
+    ]);
+    const pressGame = (item) => {
+        setGameChosen([...gameChosen, item.name]);
+    };
+    return (react_1.default.createElement(react_native_1.TouchableWithoutFeedback, { onPress: () => {
+            react_native_1.Keyboard.dismiss();
+        } },
+        react_1.default.createElement(react_native_1.View, { className: " bg-amber-50 items-center justify-center flex-1" },
+            react_1.default.createElement(react_native_1.View, { className: "bg-orange-300 px-16 mb-5 rounded py-4 mt-12" },
+                react_1.default.createElement(react_native_1.Text, { className: "font-bold" }, "GAMES TO PLAY")),
+            react_1.default.createElement(react_native_1.Text, null, displayName),
+            react_1.default.createElement(GamesList_1.default, { gameChosen: gameChosen, setGameChosen: setGameChosen }),
+            react_1.default.createElement(ChangeName_1.default, { setDisplayName: setDisplayName }),
+            react_1.default.createElement(react_native_1.View, null,
+                react_1.default.createElement(react_native_1.Text, { className: "font-semibold p-4 mb-2" }, "Example Games:")),
+            react_1.default.createElement(react_native_1.FlatList, { className: 'mb-8', numColumns: 1, data: games, renderItem: ({ item }) => (react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: () => {
+                        pressGame(item);
+                    } },
+                    react_1.default.createElement(react_native_1.Text, { className: "font-semibold p-4 mb-3 bg-red-100" }, item.name))) }),
+            react_1.default.createElement(expo_status_bar_1.StatusBar, { style: "auto" }))));
 };
-const styles = react_native_1.StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    header: {
-        backgroundColor: '#f5d57f',
-        padding: 50,
-    },
-    boldTitle: {
-        fontWeight: '400',
-    },
-    body: {
-        backgroundColor: '#faebc8',
-        padding: 20,
-        alignItems: 'center',
-    },
-    buttonContainer: {
-        marginTop: 20,
-        marginBottom: 20,
-    },
-    input: {
-        borderWidth: 1,
-        borderRadius: 2,
-        borderColor: 'grey',
-        minWidth: 100,
-        padding: 5,
-        paddingLeft: 25,
-        paddingRight: 25,
-    },
-    games: {
-        fontWeight: '200',
-    }
-});
 (0, expo_1.registerRootComponent)(App);
