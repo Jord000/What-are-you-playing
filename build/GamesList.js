@@ -10,10 +10,11 @@ const GamesList = ({ gameChosen, setGameChosen }) => {
     //
     const removeListItem = (item) => {
         const indexOfItem = gameChosen.indexOf(item);
-        const gamesArrray = [...gameChosen];
-        gamesArrray.splice(indexOfItem, 1);
-        setGameChosen(gamesArrray);
+        const gamesArray = [...gameChosen];
+        gamesArray.splice(indexOfItem, 1);
+        setGameChosen(gamesArray);
     };
+    removeListItem();
     return (react_1.default.createElement(react_native_1.View, { className: "mb-10 bg-orange-200 w-64" },
         react_1.default.createElement(react_native_1.View, null,
             react_1.default.createElement(react_native_1.Text, { className: "bg-orange-200 items-center font-semibold p-4 mb-2 text-center" }, "What are you currently playing?")),

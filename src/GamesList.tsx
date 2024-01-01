@@ -11,10 +11,9 @@ const GamesList: React.FC<Props> = ({ gameChosen, setGameChosen }) => {
   //
   const removeListItem: Function = (item: String) => {
     const indexOfItem: number = gameChosen.indexOf(item)
-    const gamesArrray: Array<String> = [...gameChosen]
-    gamesArrray.splice(indexOfItem, 1)
-    setGameChosen(gamesArrray)
-    
+    const gamesArray: Array<String> = [...gameChosen]
+    gamesArray.splice(indexOfItem, 1)
+    setGameChosen(gamesArray)
   }
 
   return (
