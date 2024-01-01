@@ -1,12 +1,17 @@
 import React, { useRef, useState } from 'react'
-import { Text, View, Button, TextInput, Alert } from 'react-native'
-import styles from './Styles'
+import {
+  Text,
+  View,
+  TextInput,
+  Alert,
+  TouchableOpacity,
+} from 'react-native'
 interface Props {
   setDisplayName: Function
 }
 
 const ChangeName: React.FC<Props> = ({ setDisplayName }) => {
-  const [name, setName] = useState<String>('___')
+  const [name, setName] = useState<String>('')
   const textInputRef = useRef<TextInput>(null)
 
   const pressSubmit: Function = () => {
@@ -26,25 +31,27 @@ const ChangeName: React.FC<Props> = ({ setDisplayName }) => {
     }
   }
 
+
+
   return (
     <View>
-      <Text style={styles.changeNameTitle}>Change name:</Text>
-      <View style={styles.changeName}>
+      <Text className="text-center font-medium">Change name:</Text>
+      <View className="flex-row items-center">
         <TextInput
-          style={styles.input}
+          className="border border-gray-400 rounded-sm p-1 px-8 mr-6"
           placeholder="My name is"
           onChangeText={(val) => {
             setName(val)
           }}
           ref={textInputRef}
         />
-        <View style={styles.buttonContainer}>
-          <Button
+        <View className="my-4">
+          <TouchableOpacity
             onPress={() => {
               pressSubmit()
             }}
-            title="submit"
-          />
+          ><Text className='bg-orange-400 p-2 px-4 rounded-md'
+          >submit</Text></TouchableOpacity>
         </View>
       </View>
     </View>
