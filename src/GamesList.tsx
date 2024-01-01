@@ -8,11 +8,13 @@ interface Props {
 }
 
 const GamesList: React.FC<Props> = ({ gameChosen, setGameChosen }) => {
+  //
   const removeListItem: Function = (item: String) => {
     const indexOfItem: number = gameChosen.indexOf(item)
     const gamesArrray: Array<String> = [...gameChosen]
     gamesArrray.splice(indexOfItem, 1)
     setGameChosen(gamesArrray)
+    
   }
 
   return (
@@ -35,7 +37,9 @@ const GamesList: React.FC<Props> = ({ gameChosen, setGameChosen }) => {
                 name="minus-circle"
                 size={20}
                 style={{ marginLeft: 'auto' }}
-                onPress={()=>{removeListItem()}}
+                onPress={() => {
+                  removeListItem(item)
+                }}
               />
             </View>
           </TouchableWithoutFeedback>
