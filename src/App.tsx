@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import ChangeName from './ChangeName'
 import GamesList from './GamesList'
+import { Modal } from 'react-native'
 
 
 interface Props {}
@@ -51,7 +52,11 @@ const App: React.FC<Props> = () => {
         </View>
         <Text>{displayName}</Text>
         <GamesList gameChosen={gameChosen} setGameChosen={setGameChosen} />
+     
+       
         <ChangeName setDisplayName={setDisplayName} />
+   
+   
         <View>
           <Text className="font-semibold p-4 mb-2">Example Games:</Text>
         </View>
